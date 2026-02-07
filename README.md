@@ -253,8 +253,8 @@ Before using this bot, you should understand:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/lilwiggy/bot.git
-   cd bot
+   git clone https://github.com/lilwiggy/your-ex.git
+   cd your-ex
    ```
 
 2. **Build the Docker image:**
