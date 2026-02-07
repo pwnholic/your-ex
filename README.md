@@ -930,9 +930,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Support
 
-- **Documentation:** [GitHub Wiki](https://github.com/lilwiggy/bot/wiki)
-- **Issues:** [GitHub Issues](https://github.com/lilwiggy/bot/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/lilwiggy/bot/discussions)
+- **Documentation:** [GitHub Wiki](https://github.com/lilwiggy/your-ex/wiki)
+- **Issues:** [GitHub Issues](https://github.com/lilwiggy/your-ex/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/lilwiggy/your-ex/discussions)
 
 ## Acknowledgments
 
