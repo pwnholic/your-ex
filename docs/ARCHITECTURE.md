@@ -32,6 +32,7 @@ graph TB
 ```
 
 Each layer has specific responsibilities:
+
 - **Presentation**: CLI commands and user interaction
 - **Application**: Workflow orchestration
 - **Domain**: Business logic (trading, analysis)
@@ -293,12 +294,12 @@ graph TB
 
 ### Error Categories
 
-| Category | Examples | Handling |
-|----------|----------|----------|
-| **Network** | RPC timeout, WebSocket disconnect | Retry with exponential backoff |
-| **Validation** | Invalid token, insufficient liquidity | Skip token, log warning |
-| **Execution** | Transaction failed, insufficient gas | Log error, update metrics |
-| **Critical** | Wallet corrupted, config invalid | Immediate shutdown |
+| Category       | Examples                              | Handling                       |
+| -------------- | ------------------------------------- | ------------------------------ |
+| **Network**    | RPC timeout, WebSocket disconnect     | Retry with exponential backoff |
+| **Validation** | Invalid token, insufficient liquidity | Skip token, log warning        |
+| **Execution**  | Transaction failed, insufficient gas  | Log error, update metrics      |
+| **Critical**   | Wallet corrupted, config invalid      | Immediate shutdown             |
 
 ### Retry Strategy
 
@@ -348,6 +349,7 @@ graph LR
 ### Optimization Strategies
 
 1. **Parallel Analysis**
+
    ```go
    // Run analyzers in parallel
    var wg sync.WaitGroup
@@ -362,6 +364,7 @@ graph LR
    ```
 
 2. **Response Caching**
+
    ```go
    // Cache expensive RPC calls
    cacheKey := fmt.Sprintf("metadata:%s", mint)
@@ -472,12 +475,12 @@ graph TB
 
 ### Security Checks
 
-| Check | Purpose | Implementation |
-|-------|---------|----------------|
-| **Rug Pull** | Detect liquidity removal | Monitor pool ownership |
-| **Honeypot** | Detect sell restrictions | Simulate sell transaction |
-| **Tax Check** | Detect high transaction taxes | Calculate buy/sell taxes |
-| **Liquidity Lock** | Verify liquidity is locked | Check lock contracts |
+| Check               | Purpose                       | Implementation             |
+| ------------------- | ----------------------------- | -------------------------- |
+| **Rug Pull**        | Detect liquidity removal      | Monitor pool ownership     |
+| **Honeypot**        | Detect sell restrictions      | Simulate sell transaction  |
+| **Tax Check**       | Detect high transaction taxes | Calculate buy/sell taxes   |
+| **Liquidity Lock**  | Verify liquidity is locked    | Check lock contracts       |
 | **Holder Analysis** | Detect concentrated ownership | Analyze token distribution |
 
 ## Testing Strategy
@@ -713,6 +716,7 @@ func (b *Bot) HealthCheck() HealthStatus {
 ---
 
 For more details, see:
+
 - [Quick Start Guide](QUICKSTART.md)
 - [Main README](../README.md)
 - [API Documentation](API.md)

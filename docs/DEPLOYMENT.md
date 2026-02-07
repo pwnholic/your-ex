@@ -61,7 +61,7 @@ Production deployment guide for the meme coin sniper bot.
 #### docker-compose.yml
 
 ```yaml
-version: '3.8'
+version: "3.8"
 
 services:
   sniper:
@@ -79,7 +79,7 @@ services:
       - ./logs:/app/logs
       - ./data:/app/data
     ports:
-      - "9090:9090"  # Metrics
+      - "9090:9090" # Metrics
     logging:
       driver: json-file
       options:
@@ -102,10 +102,10 @@ services:
     ports:
       - "9091:9090"
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
-      - '--web.console.templates=/usr/share/prometheus/consoles'
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+      - "--web.console.templates=/usr/share/prometheus/consoles"
 
   grafana:
     image: grafana/grafana:latest
@@ -134,9 +134,9 @@ global:
   evaluation_interval: 15s
 
 scrape_configs:
-  - job_name: 'meme-sniper'
+  - job_name: "meme-sniper"
     static_configs:
-      - targets: ['sniper:9090']
+      - targets: ["sniper:9090"]
 ```
 
 #### .env
@@ -259,55 +259,55 @@ spec:
         app: sniper-bot
     spec:
       containers:
-      - name: sniper
-        image: meme-sniper:latest
-        imagePullPolicy: Always
-        env:
-        - name: WALLET_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: wallet-secrets
-              key: password
-        - name: FLASHBOTS_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: api-secrets
-              key: flashbots-key
-        ports:
-        - containerPort: 9090
-          name: metrics
-        volumeMounts:
-        - name: config
-          mountPath: /app/config.yaml
-          subPath: config.yaml
-        - name: wallets
-          mountPath: /app/wallets
-        resources:
-          requests:
-            cpu: 500m
-            memory: 512Mi
-          limits:
-            cpu: 2000m
-            memory: 2Gi
-        livenessProbe:
-          httpGet:
-            path: /metrics
-            port: metrics
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /metrics
-            port: metrics
-          initialDelaySeconds: 10
-          periodSeconds: 5
+        - name: sniper
+          image: meme-sniper:latest
+          imagePullPolicy: Always
+          env:
+            - name: WALLET_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wallet-secrets
+                  key: password
+            - name: FLASHBOTS_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: api-secrets
+                  key: flashbots-key
+          ports:
+            - containerPort: 9090
+              name: metrics
+          volumeMounts:
+            - name: config
+              mountPath: /app/config.yaml
+              subPath: config.yaml
+            - name: wallets
+              mountPath: /app/wallets
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 2000m
+              memory: 2Gi
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            initialDelaySeconds: 10
+            periodSeconds: 5
       volumes:
-      - name: config
-        configMap:
-          name: sniper-config
-      - name: wallets
-        persistentVolumeClaim:
-          claimName: wallet-storage
+        - name: config
+          configMap:
+            name: sniper-config
+        - name: wallets
+          persistentVolumeClaim:
+            claimName: wallet-storage
 ```
 
 #### Persistent Volume
@@ -341,9 +341,9 @@ spec:
   selector:
     app: sniper-bot
   ports:
-  - port: 9090
-    targetPort: 9090
-    name: metrics
+    - port: 9090
+      targetPort: 9090
+      name: metrics
 ```
 
 #### Deploy Commands
@@ -422,8 +422,8 @@ journalctl -u sniper -f
 # Bot Settings
 bot:
   name: production-sniper
-  dry_run: false  # IMPORTANT: Set to false for live trading
-  log_level: info  # Use debug for troubleshooting
+  dry_run: false # IMPORTANT: Set to false for live trading
+  log_level: info # Use debug for troubleshooting
   max_concurrent_trades: 3
 
 # Chain Settings
@@ -448,7 +448,7 @@ monitoring:
     raydium:
       enabled: true
     orca:
-      enabled: false  # Disable if not needed
+      enabled: false # Disable if not needed
   connection_timeout: 10s
   max_retries: 5
 
@@ -590,14 +590,14 @@ global:
   resolve_timeout: 5m
 
 route:
-  group_by: ['alertname', 'cluster', 'service']
+  group_by: ["alertname", "cluster", "service"]
   group_wait: 10s
   group_interval: 10s
   repeat_interval: 12h
-  receiver: 'default'
+  receiver: "default"
 
 receivers:
-  - name: 'default'
+  - name: "default"
     webhook_configs:
       - url: https://your-webhook-url
     email_configs:
@@ -613,6 +613,7 @@ receivers:
 The bot is designed to run as a single instance. For scaling:
 
 1. **Multiple Independent Bots**
+
    ```yaml
    # Run multiple bots with different strategies
    bot-1: # Conservative
@@ -633,11 +634,11 @@ The bot is designed to run as a single instance. For scaling:
 
 ### Vertical Scaling
 
-| Component | CPU | RAM | Storage |
-|-----------|-----|-----|---------|
-| **Minimum** | 1 core | 512 MB | 20 GB |
-| **Recommended** | 2-4 cores | 2-4 GB | 50 GB SSD |
-| **High Performance** | 8+ cores | 8+ GB | 100 GB NVMe |
+| Component            | CPU       | RAM    | Storage     |
+| -------------------- | --------- | ------ | ----------- |
+| **Minimum**          | 1 core    | 512 MB | 20 GB       |
+| **Recommended**      | 2-4 cores | 2-4 GB | 50 GB SSD   |
+| **High Performance** | 8+ cores  | 8+ GB  | 100 GB NVMe |
 
 ### Network Optimization
 
@@ -806,13 +807,13 @@ sudo sysctl -p
 
 ### Common Issues and Solutions
 
-| Issue | Symptoms | Solution |
-|-------|----------|----------|
-| **High Memory** | OOM kills | Reduce event buffer size, disable unused monitors |
-| **High CPU** | Slow response | Increase polling intervals, reduce concurrent trades |
-| **Connection Drops** | Frequent reconnects | Check RPC endpoint health, add backup RPCs |
-| **Failed Trades** | Low success rate | Increase slippage, check gas fees |
-| **Stuck Transactions** | Pending forever | Check node status, increase priority fees |
+| Issue                  | Symptoms            | Solution                                             |
+| ---------------------- | ------------------- | ---------------------------------------------------- |
+| **High Memory**        | OOM kills           | Reduce event buffer size, disable unused monitors    |
+| **High CPU**           | Slow response       | Increase polling intervals, reduce concurrent trades |
+| **Connection Drops**   | Frequent reconnects | Check RPC endpoint health, add backup RPCs           |
+| **Failed Trades**      | Low success rate    | Increase slippage, check gas fees                    |
+| **Stuck Transactions** | Pending forever     | Check node status, increase priority fees            |
 
 ### Diagnostic Commands
 
@@ -842,6 +843,7 @@ grep -i error /opt/meme-sniper/logs/sniper.log | tail -50
 ---
 
 For additional information:
+
 - [Quick Start Guide](QUICKSTART.md)
 - [Architecture Documentation](ARCHITECTURE.md)
 - [Main README](../README.md)

@@ -24,6 +24,7 @@ This bot monitors multiple DEXs (Pump.fun, Raydium, Orca on Solana; Uniswap on B
 ### What is a Meme Coin Sniper Bot?
 
 A meme coin sniper bot is an automated trading bot that:
+
 1. **Monitors** blockchain events for new token launches
 2. **Analyzes** tokens for security risks and profit potential
 3. **Executes** trades faster than manual trading
@@ -31,17 +32,18 @@ A meme coin sniper bot is an automated trading bot that:
 
 ### Key Concepts
 
-| Concept | Description |
-|---------|-------------|
-| **Sniping** | Buying tokens immediately after liquidity is added |
-| **MEV Protection** | Using private mempools to avoid front-running |
-| **Slippage** | Price difference between expected and actual execution |
-| **Liquidity** | Amount of assets in a trading pool |
-| **Rug Pull** | Malicious act where developers abandon a token |
+| Concept            | Description                                            |
+| ------------------ | ------------------------------------------------------ |
+| **Sniping**        | Buying tokens immediately after liquidity is added     |
+| **MEV Protection** | Using private mempools to avoid front-running          |
+| **Slippage**       | Price difference between expected and actual execution |
+| **Liquidity**      | Amount of assets in a trading pool                     |
+| **Rug Pull**       | Malicious act where developers abandon a token         |
 
 ## Features
 
 ### Multi-Chain Support
+
 ```mermaid
 graph LR
     A[Sniper Bot] --> B[Solana Chain]
@@ -57,14 +59,14 @@ graph LR
 
 ### Core Features
 
-| Feature | Description |
-|---------|-------------|
-| **Real-time Monitoring** | WebSocket connections to DEXs for instant detection |
-| **Security Analysis** | Rug pull detection, honeypot checks, liquidity analysis |
-| **MEV Protection** | Flashbots and Merkle private mempool integration |
-| **Risk Management** | Take profit, stop loss, position sizing |
-| **Metrics** | Prometheus integration for monitoring |
-| **Multi-wallet Support** | Encrypted key storage for multiple wallets |
+| Feature                  | Description                                             |
+| ------------------------ | ------------------------------------------------------- |
+| **Real-time Monitoring** | WebSocket connections to DEXs for instant detection     |
+| **Security Analysis**    | Rug pull detection, honeypot checks, liquidity analysis |
+| **MEV Protection**       | Flashbots and Merkle private mempool integration        |
+| **Risk Management**      | Take profit, stop loss, position sizing                 |
+| **Metrics**              | Prometheus integration for monitoring                   |
+| **Multi-wallet Support** | Encrypted key storage for multiple wallets              |
 
 ## Architecture
 
@@ -212,12 +214,12 @@ bot/
 
 ### Required Software
 
-| Software | Version | Purpose |
-|----------|---------|---------|
-| **Go** | 1.23+ | Programming language |
-| **Docker** | 20.10+ | Containerization |
-| **Docker Compose** | 2.20+ | Multi-container orchestration |
-| **Git** | 2.30+ | Version control |
+| Software           | Version | Purpose                       |
+| ------------------ | ------- | ----------------------------- |
+| **Go**             | 1.23+   | Programming language          |
+| **Docker**         | 20.10+  | Containerization              |
+| **Docker Compose** | 2.20+   | Multi-container orchestration |
+| **Git**            | 2.30+   | Version control               |
 
 ### Required Accounts
 
@@ -228,16 +230,17 @@ bot/
 
 ### Hardware Requirements
 
-| Component | Minimum | Recommended |
-|-----------|---------|-------------|
-| **CPU** | 2 cores | 4+ cores |
-| **RAM** | 4 GB | 8 GB |
-| **Storage** | 20 GB | 50 GB SSD |
-| **Network** | 100 Mbps | 1 Gbps |
+| Component   | Minimum  | Recommended |
+| ----------- | -------- | ----------- |
+| **CPU**     | 2 cores  | 4+ cores    |
+| **RAM**     | 4 GB     | 8 GB        |
+| **Storage** | 20 GB    | 50 GB SSD   |
+| **Network** | 100 Mbps | 1 Gbps      |
 
 ### Knowledge Requirements
 
 Before using this bot, you should understand:
+
 - Basic command line usage
 - Blockchain concepts (wallets, transactions, gas fees)
 - Trading basics (orders, slippage, liquidity)
@@ -248,12 +251,14 @@ Before using this bot, you should understand:
 ### Option 1: Docker (Recommended)
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/lilwiggy/bot.git
    cd bot
    ```
 
 2. **Build the Docker image:**
+
    ```bash
    docker build -t meme-sniper:latest .
    ```
@@ -268,6 +273,7 @@ Before using this bot, you should understand:
 ### Option 2: Build from Source
 
 1. **Clone and install dependencies:**
+
    ```bash
    git clone https://github.com/lilwiggy/bot.git
    cd bot
@@ -275,6 +281,7 @@ Before using this bot, you should understand:
    ```
 
 2. **Build the binary:**
+
    ```bash
    make build
    # Or manually:
@@ -315,7 +322,7 @@ Create a `config.yaml` file based on `config.example.yaml`:
 # Bot Configuration
 bot:
   name: my-sniper-bot
-  dry_run: true  # Set to false for live trading
+  dry_run: true # Set to false for live trading
   log_level: info
   max_concurrent_trades: 3
 
@@ -323,15 +330,15 @@ bot:
 chains:
   solana:
     enabled: true
-    network: mainnet  # or devnet for testing
+    network: mainnet # or devnet for testing
     rpc_endpoints:
       - url: https://your-solana-rpc.com
         name: primary
         weight: 100
-    priority_fee: 0.0001  # SOL
+    priority_fee: 0.0001 # SOL
 
   base:
-    enabled: false  # Enable for Base trading
+    enabled: false # Enable for Base trading
     network: mainnet
     chain_id: 8453
     rpc_endpoints:
@@ -375,12 +382,12 @@ analysis:
   min_score: 70
   check_rug_pull: true
   check_honeypot: true
-  max_buy_tax: 5  # percentage
-  max_sell_tax: 5  # percentage
+  max_buy_tax: 5 # percentage
+  max_sell_tax: 5 # percentage
 
 # Strategy Configuration
 strategies:
-  mode: auto  # auto, manual, monitor
+  mode: auto # auto, manual, monitor
   max_position_size_usd: 100
   take_profit_percent: 50
   stop_loss_percent: 20
@@ -391,7 +398,7 @@ mev:
   solana:
     jupiter_api: https://quote-api.jup.ag
   base:
-    provider: flashbots  # or merkle
+    provider: flashbots # or merkle
     flashbots_api_key: your-api-key
 
 # Metrics (Optional)
@@ -573,17 +580,20 @@ strategies:
 ### Using Docker Compose (Production)
 
 1. **Create `.env` file:**
+
    ```bash
    cp .env.example .env
    # Edit with your values
    ```
 
 2. **Start services:**
+
    ```bash
    docker-compose up -d
    ```
 
 3. **View logs:**
+
    ```bash
    docker-compose logs -f sniper
    ```
@@ -596,11 +606,13 @@ strategies:
 ### Systemd Service (Linux)
 
 1. **Create service file:**
+
    ```bash
    sudo cp sniper.service /etc/systemd/system/
    ```
 
 2. **Edit service file:**
+
    ```ini
    [Unit]
    Description=Meme Coin Sniper Bot
@@ -619,6 +631,7 @@ strategies:
    ```
 
 3. **Enable and start:**
+
    ```bash
    sudo systemctl daemon-reload
    sudo systemctl enable sniper
@@ -650,29 +663,29 @@ spec:
         app: sniper-bot
     spec:
       containers:
-      - name: sniper
-        image: meme-sniper:latest
-        env:
-        - name: SNIPER_DRY_RUN
-          value: "false"
-        - name: WALLET_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: wallet-secrets
-              key: password
-        volumeMounts:
-        - name: config
-          mountPath: /app/config.yaml
-          subPath: config.yaml
-        - name: wallets
-          mountPath: /app/wallets
+        - name: sniper
+          image: meme-sniper:latest
+          env:
+            - name: SNIPER_DRY_RUN
+              value: "false"
+            - name: WALLET_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wallet-secrets
+                  key: password
+          volumeMounts:
+            - name: config
+              mountPath: /app/config.yaml
+              subPath: config.yaml
+            - name: wallets
+              mountPath: /app/wallets
       volumes:
-      - name: config
-        configMap:
-          name: sniper-config
-      - name: wallets
-        persistentVolumeClaim:
-          claimName: wallet-storage
+        - name: config
+          configMap:
+            name: sniper-config
+        - name: wallets
+          persistentVolumeClaim:
+            claimName: wallet-storage
 ```
 
 ## Monitoring
@@ -713,6 +726,7 @@ Import the provided dashboard to visualize metrics:
 **Problem:** Cannot connect to RPC endpoint
 
 **Solution:**
+
 ```bash
 # Test RPC endpoint
 curl -X POST https://your-rpc.com \
@@ -728,6 +742,7 @@ curl -X POST https://your-rpc.com \
 **Problem:** Wallet doesn't have enough balance
 
 **Solution:**
+
 ```bash
 # Check wallet balance
 sniper wallet list --id <wallet-id>
@@ -742,6 +757,7 @@ sniper wallet list --id <wallet-id>
 **Problem:** Transaction not submitted
 
 **Solution:**
+
 - Check slippage settings (increase if needed)
 - Verify liquidity pool exists
 - Check gas/priority fee settings
@@ -752,6 +768,7 @@ sniper wallet list --id <wallet-id>
 **Problem:** Bot using too much CPU
 
 **Solution:**
+
 ```yaml
 # Reduce number of monitors
 monitoring:
@@ -775,6 +792,7 @@ sniper start --log-level debug
 ```
 
 Or in config:
+
 ```yaml
 bot:
   log_level: debug
@@ -849,6 +867,7 @@ Trading meme coins carries significant risk:
 5. **Technical Risks:** RPC failures, network congestion, etc.
 
 **Always:**
+
 - Start with small amounts
 - Use stop-loss orders
 - Never invest more than you can afford to lose

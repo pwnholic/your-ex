@@ -77,7 +77,7 @@ cp config.example.yaml config.yaml
 # Basic settings
 bot:
   name: my-first-sniper
-  dry_run: true  # IMPORTANT: Start with dry_run = true
+  dry_run: true # IMPORTANT: Start with dry_run = true
   log_level: info
   max_concurrent_trades: 1
 
@@ -87,7 +87,7 @@ chains:
     enabled: true
     network: mainnet
     rpc_endpoints:
-      - url: YOUR_RPC_URL_HERE  # Paste your RPC URL
+      - url: YOUR_RPC_URL_HERE # Paste your RPC URL
         name: primary
         weight: 100
 
@@ -95,25 +95,25 @@ chains:
 monitoring:
   solana:
     pumpfun:
-      enabled: true  # Pump.fun is most popular
+      enabled: true # Pump.fun is most popular
     raydium:
-      enabled: false  # Disable others for now
+      enabled: false # Disable others for now
     orca:
       enabled: false
 
 # Analysis - Be conservative at first
 analysis:
-  min_liquidity_usd: 5000  # Only trade tokens with $5000+ liquidity
-  min_score: 80            # High quality threshold
+  min_liquidity_usd: 5000 # Only trade tokens with $5000+ liquidity
+  min_score: 80 # High quality threshold
   check_rug_pull: true
   check_honeypot: true
 
 # Strategy - Conservative settings
 strategies:
-  mode: monitor  # Start in monitor mode (no trades)
-  max_position_size_usd: 10  # Small position size
-  take_profit_percent: 100    # 2x target
-  stop_loss_percent: 30       # 30% loss limit
+  mode: monitor # Start in monitor mode (no trades)
+  max_position_size_usd: 10 # Small position size
+  take_profit_percent: 100 # 2x target
+  stop_loss_percent: 30 # 30% loss limit
 
 # Wallet settings
 wallets:
@@ -172,12 +172,14 @@ INFO Monitor mode: skipping trade
 Once comfortable with monitor mode:
 
 1. **Edit config.yaml:**
+
    ```yaml
    strategies:
-     mode: manual  # Change from monitor to manual
+     mode: manual # Change from monitor to manual
    ```
 
 2. **Restart bot:**
+
    ```bash
    sniper start --mode manual
    ```
@@ -187,24 +189,27 @@ Once comfortable with monitor mode:
 ## Step 7: Enable Auto Trading (Advanced)
 
 ⚠️ **Only enable auto trading after:**
+
 - [ ] Successfully tested in monitor mode
 - [ ] Successfully tested in manual mode
 - [ ] Understand the risks
 - [ ] Started with small amounts
 
 1. **Edit config.yaml:**
+
    ```yaml
    bot:
-     dry_run: false  # Enable live trading
+     dry_run: false # Enable live trading
 
    strategies:
      mode: auto
    ```
 
 2. **Start with very small amounts:**
+
    ```yaml
    strategies:
-     max_position_size_usd: 5  # Start small!
+     max_position_size_usd: 5 # Start small!
    ```
 
 3. **Run the bot:**
@@ -217,6 +222,7 @@ Once comfortable with monitor mode:
 ### Issue: "Connection refused"
 
 **Fix:** Check your RPC URL is correct and accessible:
+
 ```bash
 curl -X POST YOUR_RPC_URL \
   -H "Content-Type: application/json" \
@@ -226,6 +232,7 @@ curl -X POST YOUR_RPC_URL \
 ### Issue: "Wallet not found"
 
 **Fix:** Create a wallet first:
+
 ```bash
 sniper wallet create --chain solana
 ```
@@ -233,12 +240,14 @@ sniper wallet create --chain solana
 ### Issue: "Insufficient funds"
 
 **Fix:** Fund your wallet with SOL:
+
 - Get your address: `sniper wallet list`
 - Send at least 0.1 SOL to the address
 
 ### Issue: "No tokens detected"
 
 **Fix:**
+
 - Check if monitor is running correctly
 - Verify network connectivity
 - Try during high-activity periods
