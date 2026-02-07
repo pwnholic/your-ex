@@ -1,0 +1,54 @@
+bot:
+  name: sniper-bot
+  dry_run: true
+  log_level: info
+  max_concurrent_trades: 3
+
+chains:
+  solana:
+    enabled: true
+    network: devnet
+    rpc_endpoints:
+      - url: https://api.devnet.solana.com
+        name: solana-devnet
+        weight: 100
+    priority_fee:
+      base: 1000
+      max: 10000
+      multiplier: 1.2
+
+  base:
+    enabled: false
+    network: sepolia
+    rpc_endpoint: https://sepolia.base.org
+    ws_endpoint: wss://sepolia.base.org
+    chain_id: 11155111
+    gas:
+      max_priority_fee: "1000000000"
+      max_fee: "50000000000"
+      confirmation_blocks: 2
+
+wallets:
+  data_dir: ./data
+  encryption:
+    enabled: true
+
+monitoring:
+  poll_interval: 1s
+  max_retries: 3
+
+analysis:
+  min_score: 70
+  min_liquidity: 1000
+
+strategies:
+  take_profit_percent: 50
+  stop_loss_percent: 20
+  max_position_size_usd: 100
+
+alerts:
+  enabled: false
+
+metrics:
+  enabled: true
+  port: 9090

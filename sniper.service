@@ -1,0 +1,50 @@
+[Unit]
+Description=Meme Coin Sniper Bot
+Documentation=https://github.com/lilwiggy/bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+# User and group to run as
+User=sniper
+Group=sniper
+
+# Working directory
+WorkingDirectory=/opt/sniper
+
+# ExecStart
+ExecStart=/usr/local/bin/sniper start --config /etc/sniper/config.yaml
+
+# Auto-restart configuration
+Restart=always
+RestartSec=10
+StartLimitInterval=60
+StartLimitBurst=3
+
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/sniper
+ReadWritePaths=/var/log/sniper
+
+# Resource limits
+LimitNOFILE=65536
+MemoryMax=512M
+CPUQuota=200%
+
+# Environment
+Environment="SNIPER_LOG_LEVEL=info"
+Environment="SNIPPER_MODE=monitor"
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=sniper-bot
+
+# Graceful shutdown timeout
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target

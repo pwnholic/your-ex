@@ -1,0 +1,142 @@
+# Gas Town HQ .gitignore
+# Track: Role context, handoff docs, beads config/data, rig configs
+# Ignore: Git worktrees (polecats) and clones (mayor/refinery rigs), runtime state
+
+# =============================================================================
+# Runtime state files (transient)
+# =============================================================================
+**/state.json
+**/*.lock
+**/registry.json
+
+# =============================================================================
+# Rig git worktrees (recreate with 'gt sling' or 'gt rig add')
+# =============================================================================
+
+# Polecats - worker worktrees
+**/polecats/
+
+# Mayor rig clones
+**/mayor/rig/
+
+# Refinery working clones
+**/refinery/rig/
+
+# Crew workspaces (user-managed)
+**/crew/
+
+# =============================================================================
+# Runtime state directories (gitignored ephemeral data)
+# =============================================================================
+**/.runtime/
+
+# =============================================================================
+# Rig .beads symlinks (point to ignored mayor/rig/.beads, recreated on setup)
+# =============================================================================
+# Add rig-specific symlinks here, e.g.:
+# gastown/.beads
+
+# =============================================================================
+# OS and editor files
+# =============================================================================
+.DS_Store
+*~
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# =============================================================================
+# Go build artifacts and binaries
+# =============================================================================
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+build/
+dist/
+cmd/sniper/sniper
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+coverage.txt
+coverage.html
+*.coverprofile
+coverage/
+
+# Go workspace file
+go.work
+go.work.sum
+
+# =============================================================================
+# Sensitive data - wallets, configs, secrets
+# =============================================================================
+config.yaml
+config.yml
+*.local.yaml
+*.local.yml
+.env
+.env.local
+.env.*.local
+wallets/
+*.key
+*.keystore
+wallet-backup/
+secrets/
+*.seed
+*.mnemonic
+*.kubeconfig
+kubeconfig
+
+# =============================================================================
+# Logs and temporary files
+# =============================================================================
+logs/
+*.log
+log/
+data/
+cache/
+tmp/
+temp/
+*.tmp
+*.cache
+
+# =============================================================================
+# Docker and deployment
+# =============================================================================
+docker-compose.override.yml
+prometheus-data/
+grafana-data/
+
+# =============================================================================
+# Database files
+# =============================================================================
+*.db
+*.sqlite
+*.sqlite3
+
+# =============================================================================
+# Profiling data
+# =============================================================================
+*.prof
+*.pprof
+cpu.prof
+mem.prof
+block.prof
+
+# =============================================================================
+# Backup files
+# =============================================================================
+*.bak
+*.backup
+
+# =============================================================================
+# Explicitly track (override above patterns)
+# =============================================================================
+# Note: .beads/ has its own .gitignore that handles SQLite files
+# and keeps issues.jsonl, metadata.json, config file as source of truth
